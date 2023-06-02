@@ -27,7 +27,8 @@ router.post('/', (req, res) => {
         return res.status(400).json({ msg: 'Please provide the name'});
     }
     members.push(newMember);
-    res.json(members);
+    // res.json(members);
+    res.redirect('/');
 });
 
 //update a member

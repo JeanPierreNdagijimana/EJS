@@ -1,6 +1,7 @@
 const express = require ('express');
 const path = require ('path')
-const exphbs = require('express-handlebars')//engines
+const handlebars = require('express-handlebars')//engines
+const members = require ('./Members')
 //const router = require ('Router')
 // const moment = require('moment');
 const logger = require('./middleware/logger');
@@ -11,7 +12,7 @@ const app = express ();
 //app.use(logger);
 
 //Handlebars Middleware
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //body parser middleware
@@ -19,7 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));//form submission
 
 //Homepage route
-app.get('/', (req, res) => res.render('index'));
+app.get('/', (req, res) => res.render('index', {
+    title: 'Member App', members
+}));
 
 //send a normal file
 // app.get('/', (req, res) => {
